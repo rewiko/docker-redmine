@@ -3,6 +3,8 @@ set -e
 
 SSL_CERTIFICATES_DIR="${REDMINE_DATA_DIR}/certs"
 SYSCONF_TEMPLATES_DIR="${SETUP_DIR}/config"
+PLUGINS_DIR="${SETUP_DIR}/plugins"
+THEMES_DIR="${SETUP_DIR}/themes"
 USERCONF_TEMPLATES_DIR="${REDMINE_DATA_DIR}/config"
 
 DB_HOST=${DB_HOST:-}
@@ -456,6 +458,8 @@ rm -rf vendor/bundle Gemfile.lock
 ln -sf ${REDMINE_DATA_DIR}/tmp/bundle vendor/bundle
 ln -sf ${REDMINE_DATA_DIR}/tmp/Gemfile.lock Gemfile.lock
 
+cp -rf ${PLUGINS_DIR} ${REDMINE_DATA_DIR}
+
 # install user plugins
 if [[ -d ${REDMINE_DATA_DIR}/plugins ]]; then
   echo "Installing plugins..."
@@ -490,6 +494,7 @@ else
   rm -rf ${REDMINE_DATA_DIR}/tmp/plugins.sha1
 fi
 
+cp -rf ${THEMES_DIR} ${REDMINE_DATA_DIR}
 # install user themes
 if [[ -d ${REDMINE_DATA_DIR}/themes ]]; then
   echo "Installing themes..."

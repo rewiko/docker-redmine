@@ -1,0 +1,51 @@
+#!/bin/bash
+set -e
+
+# http://redminecrm.com/pages/a1-theme
+A1_VERSION=1_1_3
+if [ -d /redmine/setup/themes/a1/ ]; then
+	cp -r /redmine/setup/themes/a1 /redmine/public/themes/
+else
+	wget http://redminecrm.com/license_manager/7644/a1-${A1_VERSION}.zip -P /tmp/
+	unzip /tmp/a1_theme-${A1_VERSION}.zip -d /redmine/public/themes/
+	rm -rf /tmp/a1_theme-${A1_VERSION}.zip
+fi
+
+# http://www.redminecrm.com/pages/coffee-theme
+COFFEE_VERSION=0_0_4
+if [ -d /redmine/setup/themes/coffee ]; then
+	cp -r /redmine/setup/themes/coffee /redmine/public/themes/
+else
+	wget http://www.redminecrm.com/license_manager/4508/coffee-${COFFEE_VERSION}.zip -P /tmp/
+	unzip /tmp/coffee_theme-${COFFEE_VERSION}.zip -d /redmine/public/themes/
+	rm -rf /tmp/coffee_theme-${COFFEE_VERSION}.zip
+fi
+
+# http://redminecrm.com/pages/highrise-theme
+HIGHRISE_VERSION=1_1_2
+if [ -d /redmine/setup/themes/highrise ]; then
+	cp -r /redmine/setup/themes/highrise /redmine/public/themes/
+else
+	wget http://redminecrm.com/license_manager/7646/highrise-${HIGHRISE_VERSION}.zip -P /tmp/
+	unzip /tmp/highrise_theme-${HIGHRISE_VERSION}.zip -d /redmine/public/themes/
+	rm -rf /tmp/highrise_theme-${HIGHRISE_VERSION}.zip
+fi
+
+# http://www.redminecrm.com/pages/circle-theme
+CIRCLE_THEME_VERSION=1_0_1
+if [ -d /redmine/setup/themes/circle ]; then
+	cp -r /redmine/setup/themes/circle /redmine/public/themes/
+else
+	wget http://www.redminecrm.com/license_manager/11619/circle_theme-${CIRCLE_THEME_VERSION}.zip -P /tmp/
+	unzip /tmp/circle_theme-${CIRCLE_THEME_VERSION}.zip -d /redmine/public/themes/
+	rm -rf /tmp/circle_theme-${CIRCLE_THEME_VERSION}.zip
+fi
+
+# https://github.com/makotokw/redmine-theme-gitmike
+GITMIKE_VERSION=r6
+mkdir -p /redmine/public/themes/gitmike
+if [ -d /redmine/setup/themes/gitmike ]; then
+	cp -r /redmine/setup/themes/gitmike /redmine/public/themes/
+else
+	wget https://github.com/makotokw/redmine-theme-gitmike/archive/${GITMIKE_VERSION}.tar.gz -O - | tar -zvxf - --strip=1 -C /redmine/public/themes/gitmike
+fi
